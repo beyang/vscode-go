@@ -249,7 +249,7 @@ export function isPositionInString(document: vscode.TextDocument, position: vsco
 }
 
 export function getToolsGopath(): string {
-	let goConfig = vscode.workspace.getConfiguration('go');
+	let goConfig = vscode.workspace.getConfiguration('go', vscode.window.activeTextEditor!.document.uri);
 	let toolsGopath = goConfig['toolsGopath'];
 	if (toolsGopath) {
 		toolsGopath = resolvePath(toolsGopath);
@@ -281,7 +281,7 @@ export function getToolsEnvVars(): any {
 }
 
 export function getCurrentGoPath(): string {
-	let configGopath = vscode.workspace.getConfiguration('go')['gopath'];
+	let configGopath = vscode.workspace.getConfiguration('go', vscode.window.activeTextEditor!.document.uri)['gopath'];
 	let inferredGopath;
 	if (vscode.workspace.getConfiguration('go')['inferGopath'] === true) {
 		inferredGopath = getInferredGopath(vscode.workspace.rootPath);
